@@ -11,6 +11,7 @@ Arquivos:
     Secundary_archives: arquivos auxiliares
         menu: quadro do menu em txt
         teste: função que potencialmente melhoraria o programa, fazendo-o trabalhar adequadamente mesmo com acentuação.
-    main: função principal do programa
+    main: função principal do programa.
 
 LINK DO VIDEO DO YOUTUBE: https://www.youtube.com/watch?v=2q3MgtJtYso
+
