@@ -4,10 +4,9 @@
 #define TAM_LISTA 40
 
 char LISTA_NOMES[] = "./../Secundary_archives/nomes.txt";
-char DISCIPLINAS[MAX_SIZE][3] = {"matemática", "português", "geografia"};
-char INPUT[] = "./../IO-archives/entrada.csv";
+char DISCIPLINAS[][] = {"matematica", "portugues", "geografia"};
 
-void GerarEntrada(aluno* lista, int tam){
+void GerarEntrada(int tam){
     int n_alunos = 0;
     srand(time(NULL));
 

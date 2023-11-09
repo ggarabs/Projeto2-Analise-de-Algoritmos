@@ -12,37 +12,17 @@ INTEGRANTES:
 //Biblioteca do menu
 const char MENU[] = "./Secundary_archives/menu.txt"; //O menu foi configurado através de um txt
 
-void Menu(aluno* lista, int tam){ //Realiza a leitura do arquivo de menu e imprime na tela do usuario
-	int resp = 0;
+void Menu(char link[]){ //Realiza a leitura do arquivo de menu e imprime na tela do usuario
+	FILE* arq;
 
-	while(resp < 1 || resp > 5){
-		FILE *arq;
+	arq = fopen(link, "r");
 
-		arq = fopen(MENU, "r");
+	if(NULL == arq) return;
 
-		if(NULL == arq) return;
-
-		while(!feof(arq)){ // Imprime o Menu linha a linha
-			char line[MAX_SIZE];
-			if(NULL != fgets(line, MAX_SIZE, arq)) printf("%s", line);
-		}
-
-		fclose(arq);
-	
-		scanf("%d", &resp); //Guarda a resposta dada pelo usuario
-		switch(resp){ //Passa os parametros de acordo com a ordenação desejada
-			case 1:
-				GerarEntrada(lista, tam);
-				break;
-			case 2:
-				BubbleSort(lista, tam);
-				break;			
-			case 3:
-				MergeSort(lista, tam);
-				break;
-			
-			default: //Se digitou invalido, apresenta para o usuario digitar novamente
-				printf("Valor inválido, por favor digite novamente: ");
-		}
+	while(!feof(arq)){ // Imprime o Menu linha a linha
+		char line[MAX_SIZE];
+		if(NULL != fgets(line, MAX_SIZE, arq)) printf("%s", line);
 	}
+
+	fclose(arq);
 }

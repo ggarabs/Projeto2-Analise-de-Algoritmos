@@ -23,28 +23,33 @@ INTEGRANTES:
 int main(){
 	FILE *input, *output; //Ponteiro para os arquivos de entrada e saida
 
-	input = fopen(INPUT, "r"); //Le o arquivo de entrada
+	int resp, qtd = 0;
+	do {
+		Menu(MENU);
 
-	if(input == NULL){
-		printf("Erro ao tentar abrir o arquivo.\n");
-		return -1;
-	}
+		scanf("%d", &resp); //Guarda a resposta dada pelo usuario
 
-	//Conta o número de linhas e realiza a alocação de memória
-	int n_lines = 0;
-	char* line = (char*)calloc(MAX_SIZE, sizeof(char));
+		switch(resp){ //Passa os parametros de acordo com a ordenação desejada
+			case 1:
+				printf("Digite o número de alunos a serem gerados: ");
+				scanf("%d", &qtd);
+				GerarEntrada(qtd);
+				break;
+			case 2:
+//				BubbleSort(lista, tam);
+				break;			
+			case 3:
+//				MergeSort(lista, tam);
+				break;
+			case 4:
+				break;
+			default: //Se digitou invalido, apresenta para o usuario digitar novamente
+				printf("Valor inválido, por favor digite novamente: ");
+		}
 
-	while(!feof(input)){
-		fgets(line, MAX_SIZE, input);
-		n_lines++;
-	}
-	fclose(input); //Fecha o arquivo de entrada para reabrir em seguida
+	} while (resp != 4);
 
-	aluno* lista = (aluno*)calloc(n_lines, sizeof(aluno)); //Cria a lista de alunos alocando a memoria dinamicamente
-
-	entrada(input, lista); //Passa a entrada digitada e a lista para função entrada
-
-	Menu(lista, n_lines); //Mostra o menu ao usuario e realiza a ordenação de acordo com a função Menu()
+/*	entrada(input, lista); //Passa a entrada digitada e a lista para função entrada
 
 	output = fopen(OUTPUT, "w"); //Define a variavel saída para que ela escreva no arquivo final de saída
 
@@ -52,8 +57,7 @@ int main(){
 
 	fclose(output); //Fecha o arquivo de saída
 
-	free(line); //Libera a alocação de memória feita em linhas
 	free(lista); //Libera a memória alocada em lista
-
+*/
 	return 0;
 }

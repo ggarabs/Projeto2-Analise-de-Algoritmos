@@ -11,7 +11,7 @@ INTEGRANTES:
 //Biblioteca MergeSort realiza a ordenação, este foi o metódo escolhido para ordenação
 
 // Generaliza a função de comparação como um ponteiro com argumentos fortemente tipados.
-
+/*
 void MergeSort(aluno* vetor, int tam){ //Função MergeSort, comparador é uma função.
     if (tam <= 1) return; // Se o vetor for unitário, então já está ordenado
 
@@ -25,8 +25,8 @@ void MergeSort(aluno* vetor, int tam){ //Função MergeSort, comparador é uma f
     for (int i = 0; i < meio; i++) *(vetor1+i) = *(vetor+i);
     for (int i = meio; i < tam; i++) *(vetor2+i-meio) = *(vetor+i);
 
-    MergeSort(vetor1, meio, mtd);
-  	MergeSort(vetor2, tam-meio, mtd);
+    MergeSort(vetor1, meio);
+  	MergeSort(vetor2, tam-meio);
 
     int p1 = 0, p2 = meio; // ponteiros para cada um dos subvetores
 
@@ -72,13 +72,12 @@ void BubbleSort(aluno* vetor, int tam){ //Função MergeSort, comparador é uma 
     for (int i = 0; i < meio; i++) *(vetor1+i) = *(vetor+i);
     for (int i = meio; i < tam; i++) *(vetor2+i-meio) = *(vetor+i);
 
-    MergeSort(vetor1, meio, mtd);
-  	MergeSort(vetor2, tam-meio, mtd);
-
+    MergeSort(vetor1, meio);
+  	MergeSort(vetor2, tam-meio);
     int p1 = 0, p2 = meio; // ponteiros para cada um dos subvetores
 
     while (p1 < meio && p2 < tam){ // enquanto nenhum dos subvetores estão "vazios"
-        if (isEqual(mtd(*vetor1, *vetor2), *vetor1)){ // se vetor1 < vetor2, coloca vetor1 no vetor resultante
+        if (p1 < meio){ // se vetor1 < vetor2, coloca vetor1 no vetor resultante
             *vetor = *vetor1; 
 			vetor1++;
 			p1++;
@@ -105,3 +104,4 @@ void BubbleSort(aluno* vetor, int tam){ //Função MergeSort, comparador é uma 
         p2++;
     }
 }
+*/

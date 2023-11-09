@@ -12,7 +12,7 @@ INTEGRANTES:
 #define MAX_SIZE 150
 
 const char INPUT[] = "./IO-archives/entrada.csv", OUTPUT[] = "./IO-archives/saida.csv"; //Passa o arquivo CSV
-
+/*
 void entrada(FILE* input, aluno* lista){ //Recebe a entrada com o arquivo CSV e aloca memoria
 	input = fopen(INPUT, "r");
 	
@@ -69,3 +69,4 @@ void saida(aluno* vetor, int tamanho, FILE *output){
 	}
 	printf("\n             Lista de alunos ordenada com sucesso!\n\n"); //Mostra que a lista foi ordenada com sucesso
 }
+*/
