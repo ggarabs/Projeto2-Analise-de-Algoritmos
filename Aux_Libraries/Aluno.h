@@ -11,7 +11,7 @@ INTEGRANTES:
 #define MAX_SIZE 150 //Define o tamanho maximo do nome como 150
 
 struct Aluno{ //Estrutura Aluno
-	int ano;
+	int year;
 	char nome[MAX_SIZE], disciplina[MAX_SIZE];
 	double media;
 };

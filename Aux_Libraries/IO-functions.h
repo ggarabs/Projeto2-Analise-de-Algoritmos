@@ -11,7 +11,7 @@ INTEGRANTES:
 //Biblioca que realiza as funçoes de sistema
 #define MAX_SIZE 150
 
-const char INPUT[] = "./IO-archives/entrada.csv", OUTPUT[] = "./IO-archives/saida.csv"; //Passa o arquivo CSV
+const char OUTPUT[] = "./IO-archives/saida.csv"; //Passa o arquivo CSV
 /*
 void entrada(FILE* input, aluno* lista){ //Recebe a entrada com o arquivo CSV e aloca memoria
 	input = fopen(INPUT, "r");

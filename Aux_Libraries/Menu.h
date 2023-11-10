@@ -9,9 +9,6 @@ INTEGRANTES:
 
 */
 
-//Biblioteca do menu
-const char MENU[] = "./Secundary_archives/menu.txt"; //O menu foi configurado através de um txt
-
 void Menu(char link[]){ //Realiza a leitura do arquivo de menu e imprime na tela do usuario
 	FILE* arq;
 
