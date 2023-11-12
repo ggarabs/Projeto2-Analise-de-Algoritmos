@@ -1,27 +1,16 @@
-#define ANOS 14
-#define ANO_INICIAL 2010
-#define TAM_LISTA 40
+#define YEARS 14
+#define INITIAL_YEAR 2010
+#define LIST_SIZE 40
 
-const char *DISCIPLINAS[] = {"matematica", "portugues", "geografia"};
-const char LISTA_NOMES[] = "./Secundary_archives/nomes.txt";
-const char INPUT[] = "./IO_archives/entrada.csv";
+bool GenerateInput(const char* NAME_LIST, const char** SUBJECT, student* list, int size){
+    int n_students = 0;
 
-int GerarEntrada(aluno* list, int tam){
-    int n_alunos = 0;
-    srand(time(NULL));
+    FILE* name_file;
 
-    FILE* input = fopen(INPUT, "w"), *arq_nomes;
+    while(n_students < size){
+        list->year = rand() % YEARS + INITIAL_YEAR;
 
-    if(NULL == input){
-        printf("Erro ao tentar abrir o arquivo entrada.csv.\n");
-        fclose(input);
-        return -1;
-    }
-
-    while(n_alunos < tam){
-        list->year = rand() % ANOS + ANO_INICIAL;
-
-        int n_nome = rand() % TAM_LISTA + 1, line = 0;
+        int name_number = rand() % LIST_SIZE + 1, line = 0;
 
         char ID[7] = "", aux[2];
         
@@ -32,42 +21,34 @@ int GerarEntrada(aluno* list, int tam){
         }
         ID[6] = '\0';
 
-        arq_nomes = fopen(LISTA_NOMES, "r");
+        name_file = fopen(NAME_LIST, "r");
 
-        if(NULL == arq_nomes){
+        if(NULL == name_file){
 		    printf("Erro ao tentar abrir o arquivo nomes.txt.\n");
-            fclose(arq_nomes);
-            fclose(input);
-		    return -1;
+            fclose(name_file);
+		    return false;
         }
 
         char name[MAX_SIZE];
 
-        while(!feof(arq_nomes) && line <= n_nome){
-            fgets(name, MAX_SIZE, arq_nomes);
+        while(!feof(name_file) && line <= name_number){
+            fgets(name, MAX_SIZE, name_file);
             line++;
         }
 
         name[strlen(name)-1] = '\0';
 
-        strcpy(list->nome, strcat(name,ID));
+        strcpy(list->name, strcat(name,ID));
 
-        strcpy(list->disciplina, DISCIPLINAS[rand()%3]);
+        strcpy(list->subject, SUBJECT[rand()%3]);
 
-        list->media = (rand()%101)/10.0;
+        list->mean = (rand()%101)/10.0;
 
-        fprintf(input, "%d,", list->year);
-        fprintf(input, "%s,", list->nome);
-        fprintf(input, "%s,", list->disciplina);
-        fprintf(input, "%.1f\n", list->media);
-
-        n_alunos++;
+        n_students++;
         list++;
     }
 
-    printf("Lista de %d alunos gerada com sucesso no arquivo entrada.csv!\n", tam);
-    fclose(arq_nomes);
-    fclose(input);
+    fclose(name_file);
 
-    return 1;
+    return true;
 }

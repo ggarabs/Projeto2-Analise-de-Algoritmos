@@ -8,65 +8,50 @@ INTEGRANTES:
 
 */
 
-//Biblioca que realiza as funçoes de sistema
-#define MAX_SIZE 150
+const char OUTPUT[] = "./IO_archives/saida.csv"; //Passa o arquivo CSV
 
-const char OUTPUT[] = "./IO-archives/saida.csv"; //Passa o arquivo CSV
-/*
-void entrada(FILE* input, aluno* lista){ //Recebe a entrada com o arquivo CSV e aloca memoria
-	input = fopen(INPUT, "r");
-	
-	//Aloca a memoria atraves de calloc
-	char* line = (char*)calloc(MAX_SIZE, sizeof(char));
-	char* buffer = (char*)calloc(MAX_SIZE, sizeof(char));
+void WriteInput(const char* INPUT, student* list, int tam){ //Recebe a entrada com o arquivo CSV e aloca memoria
+	FILE* input = fopen(INPUT, "w");
 
-	//Faz um split da linha do csv e desestrutura as características do objeto, colocando na lista
-	while(!feof(input)){
-		fgets(line, MAX_SIZE, input);
-
-		lista->semestre = (int)(*line-'0');
-		lista->turma = *(line+2);
-		lista->periodo = *(line+4);
-		
-		int j = 6;
-		while(*(line+j) != ','){
-			*buffer = *(line+j);
-			buffer++, j++;
-		}
-		*buffer = '\0';
-		buffer -= ++j-7;
-
-		strcpy(lista->nome, buffer);
-
-		int k = j;
-		while(*(line+j) != ','){
-			*buffer = *(line+j);
-			buffer++; j++;
-		}
-		*buffer = '\0';
-		buffer -= j-k;
-
-		strcpy(lista->disciplina, buffer);
-
-		lista->media = (double)((int)(*(line+j+1)-'0') + (int)(*(line+j+3)-'0')/10.0);
-
-		lista++;
+	if(NULL == input){
+		printf("Erro ao tentar abrir o arquivo entrada.csv.\n");
+		fclose(input);
+		return;
 	}
+
+	int line = 0;
+
+    fprintf(input, "ANO,NOME,DISCIPLINA,MEDIA\n");
+	while(line < tam){
+		fprintf(input, "%d,", list->year);
+		fprintf(input, "%s,", list->name);
+		fprintf(input, "%s,", list->subject);
+		fprintf(input, "%.1f\n", list->mean);
+		line++;list++;
+	}
+
+	fclose(input);
 }
 
 //Grava a saída em um CSV já ordenado qundo a função é chamada
-void saida(aluno* vetor, int tamanho, FILE *output){
-    fprintf(output, "SEMESTRE,TURMA,PERIODO,NOME,DISCIPLINA,MEDIA\n");
-	int i = 0;
-	while(i < tamanho){
-        fprintf(output, "%d,", vetor->semestre);
-		fprintf(output, "%c,", vetor->turma);
-		fprintf(output, "%c,", vetor->periodo);
-		fprintf(output, "%s,", vetor->nome);
-		fprintf(output, "%s,", vetor->disciplina);
-		fprintf(output, "%.1f\n", vetor->media);
-		i++; vetor++;
+void WriteOutput(const char* OUTPUT, student* list, int tamanho){
+	FILE* output = fopen(OUTPUT, "w");
+
+	if(NULL == output){
+		printf("Erro ao abrir o arquivo saida.csv");
+		fclose(output);
+		return;
 	}
-	printf("\n             Lista de alunos ordenada com sucesso!\n\n"); //Mostra que a lista foi ordenada com sucesso
+
+	int line = 0;
+
+    fprintf(output, "ANO,NOME,DISCIPLINA,MEDIA\n");
+	while(line < tamanho){
+		fprintf(output, "%d,", list->year);
+		fprintf(output, "%s,", list->name);
+		fprintf(output, "%s,", list->subject);
+		fprintf(output, "%.1f\n", list->mean);
+		line++; list++;
+	}
+	fclose(output);
 }
-*/

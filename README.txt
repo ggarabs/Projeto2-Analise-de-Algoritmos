@@ -1,17 +1,17 @@
 Arquivos:
-    Aux_Libraries: funções utilizadas fora da Main
-        Aluno: define os dados do tipo Aluno e operações com esse tipo
-        Comparation-methods: métodos de comparação escolhidos pelo usuário e passados para o algoritmo de ordenação
-        IO-functions: Desestruturação de dados do arquivo de entrada e impressão no arquivo de saída
-        Menu: Imprime o menu, recebe a escolha do usuário e retorna
-        Merge-Sort: Algoritmo de ordenação escolhido. Complexidade O(N*logN).
-    IO-archives: arquivos de entrada e saída
-        entrada: csv de entrada
-        saída: csv de saída
-    Secundary_archives: arquivos auxiliares
-        menu: quadro do menu em txt
-        teste: função que potencialmente melhoraria o programa, fazendo-o trabalhar adequadamente mesmo com acentuação.
+    Aux_Libraries: bibliotecas de funções utilizadas fora da Main
+        Generate-Input: Gera dados novos de alunos pseudo-randomicamente.
+        IO-functions: Armazena os dados já desetruturados nos arquivos .csv correspondentes.
+        Menu: Imprime o menu.
+        Sorting-Algorithms: Algoritmos de ordenação escolhidos. MergeSort = O(N*logN), BubbleSort = O(N^2).
+        Student: Define os dados do tipo aluno.
+    IO-archives: arquivos de entrada e saída.
+        entrada: csv de entrada.
+        saída: csv de saída.
+    Secundary_archives: arquivos auxiliares.
+        menu: quadro do menu.
+        nomes: lista de nomes possíveis de ser gerados pseudo-randomicamente.
     main: função principal do programa.
 
-LINK DO VIDEO DO YOUTUBE: https://www.youtube.com/watch?v=2q3MgtJtYso
+LINK DO VIDEO DO YOUTUBE: 
 

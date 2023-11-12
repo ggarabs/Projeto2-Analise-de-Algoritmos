@@ -1,9 +1,9 @@
-/* PROJETO 1 DE PROJETO E ANÁLISE DE ALGORIMOS
+/* PROJETO II DE ANÁLISE DE ALGORIMOS I
 
-INTEGRANTES: 
+	INTEGRANTES: 
 
-	- Anderson Correa Nicodemo		| 3228567-1
 	- Felipe do Nascimento Fonseca	| 4221536-6
+	- Giovanni Alves Lavia			| 4221836-5
 	- Gustavo Garabetti Munhoz		| 4221195-6
 
 */
@@ -14,40 +14,107 @@ INTEGRANTES:
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-#include "./Aux_Libraries/Aluno.h"
+#include "./Aux_Libraries/Student.h"
 #include "./Aux_Libraries/IO-functions.h"
 #include "./Aux_Libraries/Sorting-Algorithms.h"
 #include "./Aux_Libraries/Generate-Input.h"
 #include "./Aux_Libraries/Menu.h"
-#define MAX_SIZE 150
 
-char MENU[] = "./Secundary_archives/menu.txt"; //O menu foi configurado através de um txt
+#define MAX_SIZE 150 // Tamanho maximo do nome dos alunos
+
+const char MENU[] = "./Secundary_archives/menu.txt"; //O menu foi configurado através de um txt
+const char INPUT[] = "./IO_archives/entrada.csv";
+const char *SUBJECT[] = {"matematica", "portugues", "geografia"};
+const char NAME_LIST[] = "./Secundary_archives/nomes.txt";
 
 int main(){
-	FILE *input, *output; //Ponteiro para os arquivos de entrada e saida
+    srand(time(NULL));
 
-	aluno *list;
+	student *list;
 
-	int resp, qtd = 0;
+	int ans, qtd = 0;
+	bool ordered = false, undefined_data = true;
+	long long int steps = 0;
+
+	clock_t start, end;
+	double cpu_time_used;
+
 	do {
-		Menu(MENU);
+		ShowMenu(MENU); // Exibe o menu
 
-		scanf("%d", &resp); //Guarda a resposta dada pelo usuario
+		printf("\n                        Digite uma opção: ");
+		scanf("%d", &ans); //Guarda a resposta dada pelo usuario
 
-		switch(resp){ //Passa os parametros de acordo com a ordenação desejada
+		switch(ans){ //Passa os parametros de acordo com a ordenação desejada
 			case 1:
 				printf("Digite o número de alunos a serem gerados: ");
 				scanf("%d", &qtd);
 
-				list = (aluno*)calloc(qtd, sizeof(aluno));
+				list = (student*)calloc(qtd, sizeof(student));
 
-				GerarEntrada(list, qtd);
+				GenerateInput(NAME_LIST, SUBJECT, list, qtd);
+				WriteInput(INPUT, list, qtd);
+
+				printf("Lista de dados gerados com sucesso! Pra verificá-los, consulte o arquivo entrada.csv\n");
+
+				ordered = undefined_data = false;
+
 				break;
 			case 2:
-				BubbleSort(list, qtd);
+				if(undefined_data){
+					printf("Não há dados a serem ordenados! Por favor gere novos dados.");
+					break;
+				}
+				else if(ordered){
+					printf("Lista de alunos já ordenada! Por favor gere novos dados.");
+					break;
+				}
+
+				steps = 0;
+				start = clock();
+				BubbleSort(list, qtd, &steps);
+				end = clock();
+
+				cpu_time_used = ((double)(end-start))/CLOCKS_PER_SEC;
+
+				WriteOutput(OUTPUT, list, qtd);
+
+				printf("\n             Lista de alunos ordenada com sucesso!\n\n"); //Mostra que a lista foi ordenada com sucesso
+				printf("\nAlgoritmo: Bubble Sort\n");
+				printf("\nTamanho Entrada: %d.\n", qtd);
+				printf("\nTempo execução: %.1f segundos. \n", cpu_time_used);
+				printf("\nComparações(passos): %lld.\n\n", steps);
+
+				ordered = true;
+
 				break;			
 			case 3:
-//				MergeSort(lista, tam);
+				if(undefined_data){
+					printf("Não há dados a serem ordenados! Por favor gere novos dados.");
+					break;
+				}
+				else if(ordered){
+					printf("Lista de alunos já ordenada! Por favor gere novos dados");
+					break;
+				}
+
+				steps = 0;
+				start = clock();
+				MergeSort(list, qtd, &steps);
+				end = clock();
+
+				cpu_time_used = ((double)(end-start))/CLOCKS_PER_SEC;
+
+				WriteOutput(OUTPUT, list, qtd);
+
+				printf("\n             Lista de alunos ordenada com sucesso!\n\n"); //Mostra que a lista foi ordenada com sucesso
+				printf("\nAlgoritmo: Merge Sort\n");
+				printf("\nTamanho Entrada: %d\n", qtd);
+				printf("\nTempo execução: %.1f segundos. \n", cpu_time_used);
+				printf("\nComparações(passos): %lld\n\n", steps);
+
+				ordered = true;
+
 				break;
 			case 4:
 				break;
@@ -55,19 +122,9 @@ int main(){
 				printf("Valor inválido, por favor digite novamente: ");
 		}
 
-	} while (resp != 4);
+	} while (ans != 4);
 
 	free(list);
 
-/*	entrada(input, lista); //Passa a entrada digitada e a lista para função entrada
-
-	output = fopen(OUTPUT, "w"); //Define a variavel saída para que ela escreva no arquivo final de saída
-
-	saida(lista, n_lines, output); //Escreve um CSV ordenado para o usuário final
-
-	fclose(output); //Fecha o arquivo de saída
-
-	free(lista); //Libera a memória alocada em lista
-*/
 	return 0;
 }

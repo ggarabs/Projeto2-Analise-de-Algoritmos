@@ -9,17 +9,20 @@ INTEGRANTES:
 
 */
 
-void Menu(char link[]){ //Realiza a leitura do arquivo de menu e imprime na tela do usuario
-	FILE* arq;
+void ShowMenu(const char link[]){ //Realiza a leitura do arquivo de menu e imprime na tela do usuario
+	FILE* arc;
 
-	arq = fopen(link, "r");
+	arc = fopen(link, "r");
 
-	if(NULL == arq) return;
-
-	while(!feof(arq)){ // Imprime o Menu linha a linha
-		char line[MAX_SIZE];
-		if(NULL != fgets(line, MAX_SIZE, arq)) printf("%s", line);
+	if(NULL == arc){
+		printf("Erro ao exibir o menu!");
+		return;
 	}
 
-	fclose(arq);
+	while(!feof(arc)){ // Imprime o Menu linha a linha
+		char line[MAX_SIZE];
+		if(NULL != fgets(line, MAX_SIZE, arc)) printf("%s", line);
+	}
+
+	fclose(arc);
 }

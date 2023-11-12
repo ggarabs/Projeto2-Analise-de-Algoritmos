@@ -10,10 +10,10 @@ INTEGRANTES:
 */
 #define MAX_SIZE 150 //Define o tamanho maximo do nome como 150
 
-struct Aluno{ //Estrutura Aluno
+struct Student{ //Estrutura Aluno
 	int year;
-	char nome[MAX_SIZE], disciplina[MAX_SIZE];
-	double media;
+	char name[MAX_SIZE], subject[MAX_SIZE];
+	double mean;
 };
 
-typedef struct Aluno aluno; //Renomeia a struct Aluno para simplificar a escrita de código
+typedef struct Student student; //Renomeia a struct Aluno para simplificar a escrita de código

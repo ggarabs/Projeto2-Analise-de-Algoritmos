@@ -8,68 +8,66 @@ INTEGRANTES:
 
 */
 
-//Biblioteca MergeSort realiza a ordenação, este foi o metódo escolhido para ordenação
+void MergeSort(student* array, int size, long long int* steps){ //Função MergeSort, comparador é uma função.
+    if (size <= 1) return; // Se o vetor for unitário, então já está ordenado
 
-// Generaliza a função de comparação como um ponteiro com argumentos fortemente tipados.
-/*
-void MergeSort(aluno* vetor, int tam){ //Função MergeSort, comparador é uma função.
-    if (tam <= 1) return; // Se o vetor for unitário, então já está ordenado
-
-    int meio = tam / 2;
+    int mid = size / 2;
 
     // Aloca dinamicamente dois vetores pra guardar cada metade da sublista que se busca ordenar
-	aluno* vetor1 = (aluno*)calloc(meio+1, sizeof(aluno));
-	aluno* vetor2 = (aluno*)calloc(meio+1, sizeof(aluno));
+	student* array1 = (student*)calloc(mid+1, sizeof(student));
+	student* array2 = (student*)calloc(mid+1, sizeof(student));
 
     // Copia cada elemento do vetor original para os dois subvetores
-    for (int i = 0; i < meio; i++) *(vetor1+i) = *(vetor+i);
-    for (int i = meio; i < tam; i++) *(vetor2+i-meio) = *(vetor+i);
+    for (int i = 0; i < mid; i++) *(array1+i) = *(array+i);
+    for (int i = mid; i < size; i++) *(array2+i-mid) = *(array+i);
 
-    MergeSort(vetor1, meio);
-  	MergeSort(vetor2, tam-meio);
+    MergeSort(array1, mid, steps);
+  	MergeSort(array2, size-mid, steps);
 
-    int p1 = 0, p2 = meio; // ponteiros para cada um dos subvetores
+    int p1 = 0, p2 = mid; // ponteiros para cada um dos subvetores
 
-    while (p1 < meio && p2 < tam){ // enquanto nenhum dos subvetores estão "vazios"
-        if (isEqual(mtd(*vetor1, *vetor2), *vetor1)){ // se vetor1 < vetor2, coloca vetor1 no vetor resultante
-            *vetor = *vetor1; 
-			vetor1++;
+    while (p1 < mid && p2 < size){ // enquanto nenhum dos subvetores estão "vazios"
+        *steps = *steps+1;
+        if (array1->mean < array2->mean){ // se a média do array1 for menor que a média do array2, coloca array1 no vetor resultante
+            *array = *array1; 
+			array1++;
 			p1++;
         } 
-        else{ // caso contrário, copie vetor2
-            *vetor = *vetor2;
-			vetor2++;
+        else{ // caso contrário, copie array2
+            *array = *array2;
+			array2++;
 			p2++;
         }
-		vetor++;
+		array++;
     }
 
-    while (p1 < meio){ // se sobrar elementos em vetor1, copie todos para o vetor original
-        *vetor = *vetor1;
-		vetor++;
-		vetor1++;
+    while (p1 < mid){ // se sobrar elementos em array1, copie todos para o vetor original
+        *steps = *steps+1;
+        *array = *array1;
+		array++;
+		array1++;
         p1++;
     }
 
-    while (p2 < tam){ // se sobrar em vetor2, copie todos dele para vetor original
-        *vetor = *vetor2;
-		vetor2++;
-		vetor++;
+    while (p2 < size){ // se sobrar em array2, copie todos dele para vetor original
+        *steps = *steps+1;
+        *array = *array2;
+		array2++;
+		array++;
         p2++;
     }
 }
-*/
-void BubbleSort(aluno* vetor, int tam){ //Função MergeSort, comparador é uma função.
-    for(int i = 0; i < tam; i++){
-        for(int j = 0; j < tam-1; j++){
-            if((vetor+j)->media > (vetor+j+1)->media){ //ARRUMAR
-                aluno *aux = vetor+j;
-                *(vetor+j) = *(vetor+j+1);
-                *(vetor+j+1) = *aux;
+
+void BubbleSort(student* array, int size, long long int *steps){
+    *steps = 0;
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < size-1-i; j++){
+            *steps = *steps + 1;
+            if((array+j)->mean > (array+j+1)->mean){
+                student aux = *(array+j);
+                *(array+j) = *(array+j+1);
+                *(array+j+1) = aux;
             }
         }
-    }
-    for(int i = 0; i < tam; i++){
-        printf("%s,%.1f\n", vetor[i].nome, vetor[i].media);
     }
 }
