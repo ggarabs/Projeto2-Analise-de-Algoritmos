@@ -1,14 +1,14 @@
-/* PROJETO 1 DE PROJETO E ANÁLISE DE ALGORIMOS
+/* PROJETO II DE ANÁLISE DE ALGORIMOS I
 
-INTEGRANTES: 
+	INTEGRANTES: 
 
-	- Anderson Correa Nicodemo		| 3228567-1
 	- Felipe do Nascimento Fonseca	| 4221536-6
+	- Giovanni Alves Lavia			| 4221836-5
 	- Gustavo Garabetti Munhoz		| 4221195-6
 
 */
 
-void MergeSort(student* array, int size, long long int* steps){ //Função MergeSort, comparador é uma função.
+void MergeSort(student* array, int size, long long int* steps){ //Função MergeSort
     if (size <= 1) return; // Se o vetor for unitário, então já está ordenado
 
     int mid = size / 2;
@@ -60,11 +60,11 @@ void MergeSort(student* array, int size, long long int* steps){ //Função Merge
 
 void BubbleSort(student* array, int size, long long int *steps){
     *steps = 0;
-    for(int i = 0; i < size; i++){
-        for(int j = 0; j < size-1-i; j++){
-            *steps = *steps + 1;
+    for(int i = 0; i < size; i++){ // uma iteração para cada bolha a surgir no vetor 
+        for(int j = 0; j < size-1-i; j++){ // para cada iteração anterior, vamos de 0 a posição de inserção da nova bolha
+            *steps = *steps + 1; // uma nova comparação será feita
             if((array+j)->mean > (array+j+1)->mean){
-                student aux = *(array+j);
+                student aux = *(array+j); // swap dos elementos
                 *(array+j) = *(array+j+1);
                 *(array+j+1) = aux;
             }

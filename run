@@ -1,0 +1,7 @@
+#!/bin/bash
+
+EXEC="teste"
+PROGRAM="main.c"
+
+gcc -o $EXEC $PROGRAM
+./$EXEC

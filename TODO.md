@@ -1,0 +1,1 @@
+Tratar caso para 0 alunos

@@ -1,9 +1,9 @@
 
-+--------------------------------------------------------------+
-|     Digite um número para selecionar um item do menu:        |
-+--------------------------------------------------------------+
-| 1 - Gerar entrada aleatória                                  |
-| 2 - Ordenar por nota (Bubble Sort)                           |
-| 3 - Ordenar por nota (Merge Sort)                            |
-| 4 - Sair                                                     |
-+--------------------------------------------------------------+
++---------------------------------------------+
+|                   M E N U                   |
++---------------------------------------------+
+|   1 - Gerar entrada aleatória               |
+|   2 - Ordenar por nota (Bubble Sort)        |
+|   3 - Ordenar por nota (Merge Sort)         |
+|   4 - Sair                                  |
++---------------------------------------------+

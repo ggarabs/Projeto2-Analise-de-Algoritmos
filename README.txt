@@ -14,4 +14,3 @@ Arquivos:
     main: função principal do programa.
 
 LINK DO VIDEO DO YOUTUBE: 
-
