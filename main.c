@@ -62,7 +62,7 @@ int main(){
 				printf("Digite o número de alunos a serem gerados: ");
 				scanf("%d", &qtd);
 
-				printf("     Aguarde! Gerando alunos...\n");
+				printf("Aguarde! Gerando alunos...\n");
 				sleep(3);
 				clearScreen();
 
@@ -71,7 +71,8 @@ int main(){
 				GenerateInput(NAME_LIST, SUBJECT, list, qtd); // gera elementos da lista e guarda na estrutura
 				WriteInput(INPUT, list, qtd); // grava os dados da estrutura no arquivo
 
-				printf("      Lista de alunos gerada com sucesso!\n\nPara visualizá-los, consulte o arquivo entrada.csv");
+				printf("      Lista de alunos gerada com sucesso!\n");
+				printf("\nPara visualizá-los, consulte o arquivo entrada.csv");
 				sleep(4);
 				clearScreen();
 
