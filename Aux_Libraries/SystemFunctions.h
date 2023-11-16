@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 int IdentifyOS(){ // Identifica o SO que o usuário está utilizando
     int value;
     #if __linux__

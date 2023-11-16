@@ -1,1 +1,1 @@
-Tratar caso para 0 alunos
+fazer função de encerramento

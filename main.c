@@ -45,6 +45,7 @@ int main(){
 	int ans, qtd = 0; // resposta do usuário no menu e tamanho da lista escolhido pelo usuário
 	bool ordered = false, undefined_data = true; // flags de progressão de usabilidade
 	long long int steps = 0;
+	char interrupt;
 
 	clock_t start, end; // marcadores de inicio e fim de processamento
 	double cpu_time_used;
@@ -55,15 +56,21 @@ int main(){
 		printf("\n               Digite uma opção: ");
 		scanf("%d", &ans); //Guarda a resposta dada pelo usuario
 
-		clearScreen();
-
 		switch(ans){ //Passa os parametros de acordo com a função desejada
 			case 1:
-				printf("Digite o número de alunos a serem gerados: ");
-				scanf("%d", &qtd);
+				
+				do{
+					printf("\nDigite o número de alunos a serem gerados: ");
+					scanf("%d", &qtd);
+					if(qtd <= 0){
+						printf("Valor inválido! Digite novamente.\n");
+						sleep(2);
+						clearScreen();
+					}
+				} while (qtd <= 0);
 
 				printf("Aguarde! Gerando alunos...\n");
-				sleep(3);
+				sleep(1);
 				clearScreen();
 
 				list = (student*)calloc(qtd, sizeof(student)); // aloca dinamicamente uma lista de estudantes
@@ -71,9 +78,10 @@ int main(){
 				GenerateInput(NAME_LIST, SUBJECT, list, qtd); // gera elementos da lista e guarda na estrutura
 				WriteInput(INPUT, list, qtd); // grava os dados da estrutura no arquivo
 
-				printf("      Lista de alunos gerada com sucesso!\n");
-				printf("\nPara visualizá-los, consulte o arquivo entrada.csv");
-				sleep(4);
+				printf("Lista de alunos gerada com sucesso! \nPara visualizá-los, consulte o arquivo entrada.csv");
+				printf("\n");
+
+				sleep(3);
 				clearScreen();
 
 				ordered = undefined_data = false; // dados não ordenados, mas já definidos
@@ -89,6 +97,12 @@ int main(){
 					break;
 				}
 
+				printf("\nOrdenando lista de alunos...");
+				printf("\n");
+
+				sleep(2);
+				clearScreen();
+
 				steps = 0;
 				start = clock();
 				BubbleSort(list, qtd, &steps);
@@ -102,8 +116,15 @@ int main(){
 
 				ordered = true; // dados já ordenados
 
-				break;			
+				getchar();
+				printf("Deseja seguir utilizando o programa? [s/N]: ");
+				interrupt = getchar();
+
+				if(interrupt == 'n' || interrupt == 'N') ans = 4;
+				else break;
+
 			case 3:
+				if(ans == 4) continue;
 				if(undefined_data){
 					printf("Não há dados a serem ordenados! Por favor gere novos dados.");
 					break;
@@ -112,6 +133,12 @@ int main(){
 					printf("Lista de alunos já ordenada! Por favor gere novos dados.");
 					break;
 				}
+
+				printf("\nOrdenando lista de alunos...");
+				printf("\n");
+
+				sleep(2);
+				clearScreen();
 
 				steps = 0;
 				start = clock();
@@ -126,8 +153,14 @@ int main(){
 
 				ordered = true; // dados já ordenados
 
-				break;
+				printf("Deseja seguir utilizando o programa? [s/N]: ");
+				scanf("%c", &interrupt);
+
+				if(interrupt == 'n' || interrupt == 'N') ans = 4;
+				else break;
+
 			case 4:
+				printf("Entrei nessa porra!");
 				break;
 			default: //Se digitou invalido, apresenta para o usuario digitar novamente
 				printf("Valor inválido, por favor digite novamente: ");
