@@ -32,10 +32,10 @@
 #define MAX_SIZE 150 // Tamanho maximo do nome dos alunos
 
 const char MENU[] = "./Secundary_archives/menu.txt"; //O menu foi configurado através de um txt
-const char INPUT[] = "./IO_archives/entrada.csv";
-const char OUTPUT[] = "./IO_archives/saida.csv";
-const char *SUBJECT[] = {"matematica", "portugues", "geografia"};
-const char NAME_LIST[] = "./Secundary_archives/nomes.txt";
+const char INPUT[] = "./IO_archives/entrada.csv"; // Arquivo de entrada gerado pelo usuário
+const char OUTPUT[] = "./IO_archives/saida.csv"; // Arquivo de saida onde serão inseridos os dados ordenados
+const char *SUBJECT[] = {"matematica", "portugues", "geografia"}; // matérias que serão usadas na geração aleatória
+const char NAME_LIST[] = "./Secundary_archives/nomes.txt"; // nomes que serão usados na geração aleatória
 
 int main(){
     srand(time(NULL)); // gero a semente da função de geração pseudo-aleatória a partir do instante atual
@@ -59,13 +59,13 @@ int main(){
 		switch(ans){ //Passa os parametros de acordo com a função desejada
 			case 1:
 				
-				do{
+				do{ // coleta do número de alunos a ser gerados com tratamento de valor inválido
 					printf("\nDigite o número de alunos a serem gerados: ");
 					scanf("%d", &qtd);
 					if(qtd <= 0){
 						printf("Valor inválido! Digite novamente.\n");
 						sleep(2);
-						clearScreen();
+						clearScreen(); // aguarda 2 segundos e limpa a tela
 					}
 				} while (qtd <= 0);
 
@@ -88,11 +88,11 @@ int main(){
 
 				break;
 			case 2:
-				if(undefined_data){
+				if(undefined_data){ // tratativa para o caso de não existirem dados
 					printf("Não há dados a serem ordenados! Por favor gere novos dados.");
 					break;
 				}
-				else if(ordered){
+				else if(ordered){ // tratativa para caso os dados já tenham sido ordenados
 					printf("Lista de alunos já ordenada! Por favor gere novos dados.");
 					break;
 				}
@@ -102,6 +102,8 @@ int main(){
 
 				sleep(2);
 				clearScreen();
+
+				// Realiza a ordenação e conta quantos clocks e passos o algoritmo usou
 
 				steps = 0;
 				start = clock();
@@ -117,14 +119,14 @@ int main(){
 				ordered = true; // dados já ordenados
 
 				getchar();
-				printf("Deseja seguir utilizando o programa? [s/N]: ");
+				printf("Deseja seguir utilizando o programa? [s/N]: "); // Aplicada a escolha ao usuário de retornar ao menu ou finalizar o programa
 				interrupt = getchar();
 
 				if(interrupt == 'n' || interrupt == 'N') ans = 4;
 				else break;
 
 			case 3:
-				if(ans == 4) continue;
+				if(ans == 4) continue; // pula para o caso 4 se o caso 2 tiver retotnado com a escola de sair do programa
 				if(undefined_data){
 					printf("Não há dados a serem ordenados! Por favor gere novos dados.");
 					break;
@@ -160,7 +162,6 @@ int main(){
 				else break;
 
 			case 4:
-				printf("Entrei nessa porra!");
 				break;
 			default: //Se digitou invalido, apresenta para o usuario digitar novamente
 				printf("Valor inválido, por favor digite novamente: ");
