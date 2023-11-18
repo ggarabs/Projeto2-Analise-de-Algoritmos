@@ -23,6 +23,10 @@
 
 #if __linux__
 	#include <unistd.h>
+#elif __unix__
+	#include <unistd.h>
+#elif __APPLE__
+	#include <unistd.h>
 #elif _WIN32
 	#include <windows.h>
 #elif _WIN64
@@ -78,8 +82,7 @@ int main(){
 				GenerateInput(NAME_LIST, SUBJECT, list, qtd); // gera elementos da lista e guarda na estrutura
 				WriteInput(INPUT, list, qtd); // grava os dados da estrutura no arquivo
 
-				printf("Lista de alunos gerada com sucesso! \nPara visualizá-los, consulte o arquivo entrada.csv");
-				printf("\n");
+				printf("Lista de alunos gerada com sucesso! \nPara visualizá-los, consulte o arquivo entrada.csv\n");
 
 				sleep(3);
 				clearScreen();
@@ -89,16 +92,29 @@ int main(){
 				break;
 			case 2:
 				if(undefined_data){ // tratativa para o caso de não existirem dados
-					printf("Não há dados a serem ordenados! Por favor gere novos dados.");
+					sleep(2);
+					clearScreen();
+
+					printf("Não há dados a serem ordenados! Por favor gere novos dados.\n");
+					
+					sleep(2);
+					clearScreen();
+					
 					break;
 				}
 				else if(ordered){ // tratativa para caso os dados já tenham sido ordenados
-					printf("Lista de alunos já ordenada! Por favor gere novos dados.");
+					sleep(2);
+					clearScreen();
+					
+					printf("Lista de alunos já ordenada! Por favor gere novos dados.\n");
+
+					sleep(2);
+					clearScreen();
+
 					break;
 				}
 
-				printf("\nOrdenando lista de alunos...");
-				printf("\n");
+				printf("\nOrdenando lista de alunos...\n");
 
 				sleep(2);
 				clearScreen();
@@ -118,53 +134,68 @@ int main(){
 
 				ordered = true; // dados já ordenados
 
-				getchar();
-				printf("Deseja seguir utilizando o programa? [s/N]: "); // Aplicada a escolha ao usuário de retornar ao menu ou finalizar o programa
-				interrupt = getchar();
-
-				if(interrupt == 'n' || interrupt == 'N') ans = 4;
+				if(continuar(interrupt)) ans = 4; // verifica se o usuário deseja ou não continuar a execução do programa
 				else break;
 
 			case 3:
-				if(ans == 4) continue; // pula para o caso 4 se o caso 2 tiver retotnado com a escola de sair do programa
-				if(undefined_data){
-					printf("Não há dados a serem ordenados! Por favor gere novos dados.");
-					break;
-				}
-				else if(ordered){
-					printf("Lista de alunos já ordenada! Por favor gere novos dados.");
-					break;
-				}
+				if(ans != 4){ // pula para o caso 4 se o caso 2 tiver retotnado com a escolha de sair do programa
+					
+					if(undefined_data){ // verifica se não foram gerados os dados
+						sleep(2);
+						clearScreen();
 
-				printf("\nOrdenando lista de alunos...");
-				printf("\n");
+						printf("Não há dados a serem ordenados! Por favor gere novos dados.\n");
+						
+						sleep(2);
+						clearScreen();
+						
+						break;
+					}
+					else if(ordered){ // verifica se já foram ordenados os dados
+						sleep(2);
+						clearScreen();
 
+						printf("Lista de alunos já ordenada! Por favor gere novos dados.\n");
+
+						sleep(2);
+						clearScreen();
+
+						break;
+					}
+
+					printf("\nOrdenando lista de alunos...\n");
+
+					sleep(2);
+					clearScreen();
+
+					steps = 0;
+					start = clock();
+					MergeSort(list, qtd, &steps);
+					end = clock();
+
+					cpu_time_used = ((double)(end-start))/CLOCKS_PER_SEC; // tempo do programa: numeros de ciclos de clock por clocks por segundo
+
+					WriteOutput(OUTPUT, list, qtd); // escreve dados ordenados da estrutura no arquivo de saída
+
+					ShowAlgorithmPerformance(qtd, cpu_time_used, steps, "Merge Sort"); // mostra dados da ordenação
+
+					ordered = true; // dados já ordenados
+					
+					if(continuar(interrupt)) ans = 4; // verifica se o usuário deseja ou não continuar a execução do programa
+					else break;
+				}
+				
+			case 4: // caso de saida
+				clearScreen();
+				printf("\nMuito obrigado por usar o programa ordenador :)\n		  Saindo...\n\n\n");
+				sleep(3);
+				break;
+
+			default: //Se digitou invalido, apresenta para o usuario digitar novamente
+				clearScreen();
+				printf("Valor inválido, por favor digite novamente: \n");
 				sleep(2);
 				clearScreen();
-
-				steps = 0;
-				start = clock();
-				MergeSort(list, qtd, &steps);
-				end = clock();
-
-				cpu_time_used = ((double)(end-start))/CLOCKS_PER_SEC; // tempo do programa: numeros de ciclos de clock por clocks por segundo
-
-				WriteOutput(OUTPUT, list, qtd); // escreve dados ordenados da estrutura no arquivo de saída
-
-				ShowAlgorithmPerformance(qtd, cpu_time_used, steps, "Merge Sort"); // mostra dados da ordenação
-
-				ordered = true; // dados já ordenados
-
-				printf("Deseja seguir utilizando o programa? [s/N]: ");
-				scanf("%c", &interrupt);
-
-				if(interrupt == 'n' || interrupt == 'N') ans = 4;
-				else break;
-
-			case 4:
-				break;
-			default: //Se digitou invalido, apresenta para o usuario digitar novamente
-				printf("Valor inválido, por favor digite novamente: ");
 		}
 
 	} while (ans != 4);

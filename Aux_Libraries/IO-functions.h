@@ -59,7 +59,8 @@ bool WriteOutput(const char* OUTPUT, student* list, int tam){
 
 //Grava a saída em um CSV já ordenado qundo a função é chamada
 void ShowAlgorithmPerformance(int size, double time, long long int swaps, char* algorithmName){
-	printf("\n             Lista de alunos ordenada com sucesso!\n\n"); //Mostra que a lista foi ordenada com sucesso
+	printf("\nLista de alunos ordenada com sucesso!"); //Mostra que a lista foi ordenada com sucesso
+	printf("\nPara consultar os dados acesse o arquivo saida.csv\n\n");
 	printf("\nAlgoritmo: %s\n", algorithmName);
 	printf("\nTamanho Entrada: %d.\n", size);
 	printf("\nTempo execução: %.1f segundos. \n", time);

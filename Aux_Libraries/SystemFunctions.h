@@ -22,3 +22,13 @@ void clearScreen(){ // Limpa o terminal onde o programa está sendo executado
     if(value == 0) system("clear");
     else system("cls");
 }
+
+bool continuar(char interrupt){
+    getchar(); // coleta o \n usado na ultima inserção de texto 
+    printf("Deseja seguir utilizando o programa? [s/N]: ");
+	interrupt = getchar(); // coleta o caractere da escolha
+
+    clearScreen(); // limpa a tela
+
+    return (interrupt == 'n' || interrupt == 'N');
+}
